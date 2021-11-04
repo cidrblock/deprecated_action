@@ -59,7 +59,7 @@ class ActionModule(ActionBase):
             self._result.update({"failed": True, "msg": " ".join(errors)})
 
     def _get_spec(self):
-        ref = dict(zip(["corg", "cname", "plugin"], self._name.split(".")))
+        ref = dict(zip(["corg", "cname", "plugin"], self._name.split(".",2)))
         pylib = "ansible_collections.{corg}.{cname}.plugins.modules.{plugin}".format(
             **ref
         )

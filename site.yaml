@@ -7,6 +7,7 @@
       action: warn
       name: ansible.netcommon.net_vlan
   - ansible.introspect.pluginfo:
+      name: community.general.cloud.linode.linode
+  - ansible.introspect.pluginfo:
       action: fail
       name: ansible.netcommon.net_user
-  
