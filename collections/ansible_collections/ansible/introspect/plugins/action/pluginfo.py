@@ -2,7 +2,7 @@
 # Copyright 2021 Red Hat
 # GNU General Public License v3.0+
 # (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
-"""The get action plugin
+"""The pluginfo action plugin
 """
 
 from __future__ import absolute_import, division, print_function
@@ -14,10 +14,8 @@ __metaclass__ = type
 from importlib import import_module
 
 from typing import Dict
-from typing import Union
 
 import yaml
-from ansible.parsing.plugin_docs import read_docstring
 from ansible.plugins.action import ActionBase
 from ansible.utils.display import Display
 
@@ -44,7 +42,7 @@ class ActionModule(ActionBase):
     """action module"""
 
     def __init__(self, *args, **kwargs):
-        super(ActionModule, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._result: Dict
         self._action: str
         self._name: str
@@ -67,7 +65,7 @@ class ActionModule(ActionBase):
         )
         try:
             doc = getattr(import_module(pylib), "DOCUMENTATION")
-        except AttributeError as exc:
+        except AttributeError as _exc:
             self._result["failed"] = True
             self._result[
                 "msg"
@@ -92,7 +90,7 @@ class ActionModule(ActionBase):
 
     def run(self, tmp=None, task_vars=None):
         # pylint: disable=W0212
-        self._result = super(ActionModule, self).run(tmp, task_vars)
+        self._result = super().run(tmp, task_vars)
         self._set_vars()
         self._check_argspec(DOCUMENTATION)
         if self._result.get("failed"):
