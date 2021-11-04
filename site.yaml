@@ -1,0 +1,12 @@
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - ansible.introspect.pluginfo:
+      name: ansible.netcommon.cli_config
+  - ansible.introspect.pluginfo:
+      action: warn
+      name: ansible.netcommon.net_vlan
+  - ansible.introspect.pluginfo:
+      action: fail
+      name: ansible.netcommon.net_user
+  
